@@ -1,0 +1,55 @@
+require 'httparty'
+
+module Napi
+  class Newsapi
+    include HTTParty
+    base_uri 'https://newsapi.org/v2'
+
+    attr_reader :api_key
+
+    def initialize(api_key)
+      @api_key = api_key
+    end
+
+
+
+#query params:
+#:country
+#:category
+#:sources
+#:q
+#:pageSize
+#:page
+def top_headlines(options = {})
+  options.merge!({ apiKey => api_key })
+  self.class.get('/top-headlines/get', options)
+end
+
+
+
+
+private
+
+apiKey = '8be3133fee004afe9866824a491f4e83'
+
+end
+end
+
+#
+#Everything.new(:q, :qInTitle, :sources, :domains, :excludedDomains, :from, :to, :language, :sortBy, :pageSize, :page)
+#Sources.new(:category, :language, :country)
+#
+#
+#napi = Napi::Newsapi.new '8be3133fee004afe9866824a491f4e83'
+#
+#
+#napi.v2 'top-headlines', country: 'us', category: 'category', sources: 'sources', q: 'q', pageSize: 'pageSize', page: 'page'
+#
+#napi.v2 'everything', q: 'q', qInTitle: 'qInTitle', sources: 'sources', domains: 'domains', excludedDomains: 'excludedDomains', from: 'from', to: 'to', language: 'language', sortBy: 'sortBy', pageSize: 
+#'pageSize', page: 'page'
+#
+#napi.v2 'sources', category: 'category', language: 'language', country: 'country'
+#
+#
+#
+#
